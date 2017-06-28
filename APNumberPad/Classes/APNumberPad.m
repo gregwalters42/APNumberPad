@@ -12,7 +12,7 @@
 
 @interface APNumberPad () {
     BOOL _clearButtonLongPressGesture;
-
+    
     struct {
         unsigned int textInputSupportsShouldChangeTextInRange : 1;
         unsigned int delegateSupportsTextFieldShouldChangeCharactersInRange : 1;
@@ -50,6 +50,8 @@
  */
 @property (strong, readwrite, nonatomic) Class<APNumberPadStyle> styleClass;
 
+@property BOOL switchFunctionButtons;
+
 @end
 
 
@@ -70,7 +72,8 @@
         self.frame = [self.styleClass numberPadFrame];
         self.autoresizingMask = UIViewAutoresizingFlexibleHeight; // for support rotation
         self.backgroundColor = [self.styleClass numberPadBackgroundColor];
-
+        self.switchFunctionButtons = YES;
+        
         [self addNotificationsObservers];
 
         self.delegate = delegate;
@@ -156,7 +159,12 @@
     // Function button
     //
     left = (CGRectGetWidth(self.bounds) - maximumWidth) / 2;
-    self.leftButton.frame = CGRectMake(left, top, buttonSize.width, buttonSize.height);
+    if(self.switchFunctionButtons) {
+        self.clearButton.frame = CGRectMake(left, top, buttonSize.width, buttonSize.height);
+    } else {
+        self.leftButton.frame = CGRectMake(left, top, buttonSize.width, buttonSize.height);
+    }
+    
 
     // Number buttons (0)
     //
@@ -167,7 +175,11 @@
     // Clear button
     //
     left += buttonSize.width + sep;
-    self.clearButton.frame = CGRectMake(left, top, buttonSize.width, buttonSize.height);
+    if(self.switchFunctionButtons) {
+        self.leftButton.frame = CGRectMake(left, top, buttonSize.width, buttonSize.height);
+    } else {
+        self.clearButton.frame = CGRectMake(left, top, buttonSize.width, buttonSize.height);
+    }
 }
 
 #pragma mark - Notifications
