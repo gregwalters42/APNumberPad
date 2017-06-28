@@ -13,7 +13,7 @@ Also APNumberPad provides customizable left-function button.
   s.homepage         = 'https://github.com/podkovyrin/APNumberPad'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Andrew Podkovyrin' => 'podkovyrin@gmail.com' }
-  s.source           = { :git => 'https://github.com/podkovyrin/APNumberPad.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/gregwalters42/APNumberPad.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/podkovyr'
 
   s.ios.deployment_target = '8.2'
